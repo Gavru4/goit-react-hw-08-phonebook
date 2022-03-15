@@ -10,6 +10,8 @@ import { loaderSelector } from "./redux/selectors/selectors";
 import MainNav from "./Components/MainNav/MainNav";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./Components/HomePage/HomaPage";
+import UserMenu from "./Components/UserMenu/UserMenu";
+import AuthNav from "./Components/AuthNav/AuthNav";
 import Login from "./Components/Login/Login";
 import NewUser from "./Components/NawUser/NewUser";
 
@@ -19,25 +21,26 @@ const loaderStyle = {
 };
 const App = () => {
   const dispatch = useDispatch();
+  const logIn = useSelector((state) => state.contacts.isLogedIn);
 
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
 
   const isLoading = useSelector(loaderSelector);
-
   return (
     <>
       <MainNav />
+      {logIn ? <UserMenu /> : <AuthNav />}
       <Switch>
         <Route path={"/"} exact>
           <HomePage />
         </Route>
-        <Route path={"/register"}>
-          <NewUser />
-        </Route>
         <Route path={"/login"}>
           <Login />
+        </Route>
+        <Route path="/register" activeStyle={{ color: "red" }}>
+          <NewUser />
         </Route>
 
         <Route path={"/contacts"}>

@@ -46,7 +46,7 @@ export const getContactsApi = () => {
 export const newUserApi = (form) => {
   return axios
     .post("users/signup", form)
-    .then((res) => res.data)
+    .then((res) => res.data.token)
     .catch((error) => {
       throw error;
     });
@@ -55,6 +55,15 @@ export const newUserApi = (form) => {
 export const getUserLogin = (form) => {
   return axios
     .post("users/login", form)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const userLogoutApi = () => {
+  return axios
+    .post("users/logout")
     .then((res) => res.data)
     .catch((error) => {
       throw error;

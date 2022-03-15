@@ -1,5 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { deleteContact, getContacts, newUser } from "./contactsOperation";
+import {
+  deleteContact,
+  getContacts,
+  loginUser,
+  newUser,
+  userLogout,
+} from "./contactsOperation";
 
 const initialState = {
   user: { name: null, email: null },
@@ -16,6 +22,18 @@ export const contactsRudeser = createReducer(initialState, {
     state.user = payload.user;
     state.token = payload.token;
     state.isLogedIn = true;
+  },
+  [loginUser.fulfilled]: (state, { payload }) => {
+    state.user = payload.user;
+    state.email = payload.email;
+    state.token = payload.token;
+    state.isLogedIn = true;
+  },
+  [userLogout.fulfilled]: (state) => {
+    state.user = initialState.user.name;
+    state.email = initialState.user.email;
+    state.token = null;
+    state.isLogedIn = false;
   },
 });
 
