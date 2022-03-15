@@ -1,12 +1,22 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { deleteContact, getContacts, putContact } from "./contactsOperation";
+import { deleteContact, getContacts, newUser } from "./contactsOperation";
 
-export const contactsRudeser = createReducer([], {
+const initialState = {
+  user: { name: null, email: null },
+  token: null,
+  isLogedIn: false,
+};
+
+export const contactsRudeser = createReducer(initialState, {
   [getContacts.fulfilled]: (_, { payload }) => payload,
   [deleteContact.fulfilled]: (state, { payload }) => {
     return state.filter((el) => el.id !== payload.id);
   },
-  [putContact.fulfilled]: (state, { payload }) => [...state, payload],
+  [newUser.fulfilled]: (state, { payload }) => {
+    state.user = payload.user;
+    state.token = payload.token;
+    state.isLogedIn = true;
+  },
 });
 
 export const isLoadingReduser = createReducer(false, {
@@ -16,7 +26,7 @@ export const isLoadingReduser = createReducer(false, {
   [deleteContact.pending]: () => true,
   [deleteContact.fulfilled]: () => false,
   [deleteContact.rejected]: () => false,
-  [putContact.pending]: () => true,
-  [putContact.fulfilled]: () => false,
-  [putContact.rejected]: () => false,
+  [newUser.pending]: () => true,
+  [newUser.fulfilled]: () => false,
+  [newUser.rejected]: () => false,
 });

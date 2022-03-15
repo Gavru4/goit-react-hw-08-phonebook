@@ -43,7 +43,7 @@ export const getContactsApi = () => {
     });
 };
 
-export const putContactApi = (form) => {
+export const newUserApi = (form) => {
   return axios
     .post("users/signup", form)
     .then((res) => res.data)
@@ -52,6 +52,14 @@ export const putContactApi = (form) => {
     });
 };
 
+export const getUserLogin = (form) => {
+  return axios
+    .post("users/login", form)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+};
 export const deleteContactApi = (id) => {
   return axios
     .delete(`contacts/${id}`)

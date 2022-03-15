@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   deleteContactApi,
   getContactsApi,
-  putContactApi,
+  getUserLogin,
+  newUserApi,
 } from "../../utils/contactsApi";
 
 export const getContacts = createAsyncThunk(
@@ -17,11 +18,22 @@ export const getContacts = createAsyncThunk(
   }
 );
 
-export const putContact = createAsyncThunk(
+export const loginUser = createAsyncThunk(
+  "users/login",
+  async (form, thunkApi) => {
+    try {
+      const login = await getUserLogin(form);
+      return login;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.messsege);
+    }
+  }
+);
+export const newUser = createAsyncThunk(
   "users/signup",
   async (form, thunkApi) => {
     try {
-      const newContact = await putContactApi(form);
+      const newContact = await newUserApi(form);
       return newContact;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

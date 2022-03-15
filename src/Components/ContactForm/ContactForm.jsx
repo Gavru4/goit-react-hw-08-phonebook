@@ -1,7 +1,7 @@
 import s from "./ContactForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { putContact } from "../../redux/contacts/contactsOperation";
+import { newUser } from "../../redux/contacts/contactsOperation";
 
 const stateObj = {
   name: "",
@@ -21,7 +21,7 @@ const ContactForm = () => {
     const isIncludes = contacts.some((el) => el.name === form.name);
     if (isIncludes) return alert(`${form.name} is olredy in contact`);
 
-    dispatch(putContact(form));
+    dispatch(newUser(form));
   };
 
   const onFormSubmit = (e) => {

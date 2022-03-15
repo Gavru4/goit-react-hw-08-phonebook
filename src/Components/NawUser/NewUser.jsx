@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { putContact } from "../../redux/contacts/contactsOperation";
+import { newUser } from "../../redux/contacts/contactsOperation";
 
 const form = {
   name: "",
@@ -20,7 +20,7 @@ const NewUser = () => {
   const onFormSubmit = (e) => {
     console.log(userForm);
     e.preventDefault();
-    dispatch(putContact(userForm));
+    dispatch(newUser(userForm));
     setUserForm(form);
   };
 
