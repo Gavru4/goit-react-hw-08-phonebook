@@ -18,7 +18,7 @@ export const getContacts = createAsyncThunk(
 );
 
 export const putContact = createAsyncThunk(
-  "contacts/putContact",
+  "users/signup",
   async (form, thunkApi) => {
     try {
       const newContact = await putContactApi(form);

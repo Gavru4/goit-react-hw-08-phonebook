@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { putContact } from "../../redux/contacts/contactsOperation";
 
 const form = {
   name: "",
@@ -7,60 +8,55 @@ const form = {
   password: "",
 };
 
-//  const [state, setState] = useState(stateList);
-//  const onLeaveFeedback = (name) => {
-//    setState((prevStateList) => ({
-//      ...prevStateList,
-//      [name]: prevStateList[name] + 1,
-//    }));
-
 const NewUser = () => {
   const [userForm, setUserForm] = useState(form);
+  const dispatch = useDispatch();
 
   const hendlerInputChange = (e) => {
     const { name, value } = e.target;
-    setUserForm({ [name]: value });
+    setUserForm({ ...userForm, [name]: value });
   };
 
   const onFormSubmit = (e) => {
+    console.log(userForm);
     e.preventDefault();
+    dispatch(putContact(userForm));
     setUserForm(form);
   };
 
   return (
-    <NavLink to={"/register"}>
-      <form onSubmit={onFormSubmit}>
-        <label for="name">Enter your name:</label>
+    // <NavLink to={"/register"}>
+    <form onSubmit={onFormSubmit}>
+      <label>
+        <span>Enter your name:</span>
         <input
           value={userForm.name}
           type="text"
-          id="name"
           name="name"
           onChange={hendlerInputChange}
           required
         />
-        <label for="email">Enter your email:</label>
+        <span>Enter your email:</span>
         <input
           value={userForm.email}
           type="email"
-          id="email"
           name="email"
           onChange={hendlerInputChange}
           required
         />
 
-        <label for="pwd">Password:</label>
+        <span>Password:</span>
         <input
           value={userForm.password}
           type="password"
-          id="pwd"
-          name="pwd"
+          name="password"
           onChange={hendlerInputChange}
           required
         />
-        <button type="button">Submit</button>
-      </form>
-    </NavLink>
+        <button type="submit">Submit</button>
+      </label>
+    </form>
+    // </NavLink>
   );
 };
 
