@@ -1,23 +1,26 @@
 import { createReducer } from "@reduxjs/toolkit";
 import {
+  addUserContacts,
   deleteContact,
-  getContacts,
+  getUserContacts,
   loginUser,
   newUser,
   userLogout,
 } from "./contactsOperation";
 
 const initialState = {
-  user: { name: null, email: null },
+  user: { name: null, email: null, number: null },
   token: null,
   isLogedIn: false,
 };
-
 export const contactsRudeser = createReducer(initialState, {
-  [getContacts.fulfilled]: (_, { payload }) => payload,
-  [deleteContact.fulfilled]: (state, { payload }) => {
-    return state.filter((el) => el.id !== payload.id);
+  [addUserContacts.fulfilled]: (state, { payload }) => {
+    // state.user = payload.name;
+    state.number = payload.number;
+    state.token = payload.token;
+    state.isLogedIn = true;
   },
+
   [newUser.fulfilled]: (state, { payload }) => {
     state.user = payload.user;
     state.token = payload.token;
@@ -35,12 +38,15 @@ export const contactsRudeser = createReducer(initialState, {
     state.token = null;
     state.isLogedIn = false;
   },
+  [deleteContact.fulfilled]: (state, { payload }) => {
+    return state.filter((el) => el.id !== payload.id);
+  },
 });
 
 export const isLoadingReduser = createReducer(false, {
-  [getContacts.pending]: () => true,
-  [getContacts.fulfilled]: () => false,
-  [getContacts.rejected]: () => false,
+  [getUserContacts.pending]: () => true,
+  [getUserContacts.fulfilled]: () => false,
+  [getUserContacts.rejected]: () => false,
   [deleteContact.pending]: () => true,
   [deleteContact.fulfilled]: () => false,
   [deleteContact.rejected]: () => false,

@@ -3,9 +3,10 @@ import axios from "axios";
 
 import {
   deleteContactApi,
-  getContactsApi,
   getUserLogin,
+  getUsersContactsApi,
   newUserApi,
+  postNewContactsApi,
   userLogoutApi,
 } from "../../utils/contactsApi";
 
@@ -18,12 +19,26 @@ const token = {
   },
 };
 
-export const getContacts = createAsyncThunk(
-  "contacts/getContacts",
+export const getUserContacts = createAsyncThunk(
+  "/contacts",
   async (_, thunkApi) => {
     try {
-      const contacts = await getContactsApi();
+      const contacts = await getUsersContactsApi();
+      // token.set(form.token);
+      console.log(contacts);
       return contacts;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addUserContacts = createAsyncThunk(
+  "/contacts",
+  async (form, thunkApi) => {
+    try {
+      const contact = await postNewContactsApi(form);
+      return contact;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

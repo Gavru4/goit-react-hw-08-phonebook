@@ -1,11 +1,14 @@
 import s from "./ContactForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { newUser } from "../../redux/contacts/contactsOperation";
+import {
+  addUserContacts,
+  newUser,
+} from "../../redux/contacts/contactsOperation";
 
 const stateObj = {
   name: "",
-  phone: "",
+  number: "",
 };
 const ContactForm = () => {
   const [form, setForm] = useState(stateObj);
@@ -17,17 +20,18 @@ const ContactForm = () => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
-  const onContactIncludes = (form) => {
-    const isIncludes = contacts.some((el) => el.name === form.name);
-    if (isIncludes) return alert(`${form.name} is olredy in contact`);
+  // const onContactIncludes = (form) => {
+  //   const isIncludes = contacts.some((el) => el.name === form.name);
+  //   if (isIncludes) return alert(`${form.name} is olredy in contact`);
 
-    dispatch(newUser(form));
-  };
+  //   dispatch(newUser(form));
+  // };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    onContactIncludes(form);
-
+    // onContactIncludes(form);
+    // dispatch(newUser(form));
+    dispatch(addUserContacts(form));
     resetForm();
   };
 
@@ -49,10 +53,10 @@ const ContactForm = () => {
         />
         <span className={s.title}>Number</span>
         <input
-          value={form.phone}
+          value={form.number}
           onChange={heandlerInputChange}
           type="tel"
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

@@ -34,9 +34,18 @@ const baseUrl = "https://connections-api.herokuapp.com";
 
 axios.defaults.baseURL = baseUrl;
 
-export const getContactsApi = () => {
+export const getUsersContactsApi = () => {
   return axios
-    .get("contacts")
+    .get("/contacts")
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const postNewContactsApi = (form) => {
+  return axios
+    .post("/contacts", form)
     .then((res) => res.data)
     .catch((error) => {
       throw error;
