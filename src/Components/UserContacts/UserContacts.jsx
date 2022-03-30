@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserContacts } from "../../redux/contacts/contactsOperation";
 import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
 import Filter from "../Filter/Filter";
@@ -12,8 +9,7 @@ import Filter from "../Filter/Filter";
 
 const UserContacts = () => {
   //   const isLoading = useSelector(loaderSelector);
-  const dispatch = useDispatch();
-  const userToken = useSelector((state) => state.contacts);
+  // const userToken = useSelector((state) => state.contacts);
 
   return (
     <>

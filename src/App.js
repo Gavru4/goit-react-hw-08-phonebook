@@ -13,7 +13,7 @@ import UserContacts from "./Components/UserContacts/UserContacts";
 
 const App = () => {
   // const dispatch = useDispatch();
-  const logIn = useSelector((state) => state.contacts.isLogedIn);
+  const logIn = useSelector((state) => state.user.isLogedIn);
 
   // const isLoading = useSelector(loaderSelector);
   return (

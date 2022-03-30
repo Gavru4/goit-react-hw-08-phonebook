@@ -1,10 +1,7 @@
 import s from "./ContactForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import {
-  addUserContacts,
-  newUser,
-} from "../../redux/contacts/contactsOperation";
+import { addUserContacts } from "../../redux/contacts/contactsOperation";
 
 const stateObj = {
   name: "",

@@ -3,43 +3,20 @@ import {
   addUserContacts,
   deleteContact,
   getUserContacts,
-  loginUser,
-  newUser,
-  userLogout,
 } from "./contactsOperation";
 
-const initialState = {
-  user: { name: null, email: null, number: null },
-  token: null,
-  isLogedIn: false,
-};
-export const contactsRudeser = createReducer(initialState, {
+export const contactsRudeser = createReducer([], {
   [addUserContacts.fulfilled]: (state, { payload }) => {
-    // state.user = payload.name;
-    state.number = payload.number;
-    state.token = payload.token;
-    state.isLogedIn = true;
+    const contact = [...state, payload];
+    return contact;
   },
 
-  [newUser.fulfilled]: (state, { payload }) => {
-    state.user = payload.user;
-    state.token = payload.token;
-    state.isLogedIn = true;
+  [getUserContacts.fulfilled]: (state, { payload }) => {
+    return payload;
   },
-  [loginUser.fulfilled]: (state, { payload }) => {
-    state.user = payload.user;
-    state.email = payload.email;
-    state.token = payload.token;
-    state.isLogedIn = true;
-  },
-  [userLogout.fulfilled]: (state) => {
-    state.user = initialState.user.name;
-    state.email = initialState.user.email;
-    state.token = null;
-    state.isLogedIn = false;
-  },
+
   [deleteContact.fulfilled]: (state, { payload }) => {
-    return state.filter((el) => el.id !== payload.id);
+    return state.filter((el) => el.id !== payload);
   },
 });
 
@@ -50,7 +27,4 @@ export const isLoadingReduser = createReducer(false, {
   [deleteContact.pending]: () => true,
   [deleteContact.fulfilled]: () => false,
   [deleteContact.rejected]: () => false,
-  [newUser.pending]: () => true,
-  [newUser.fulfilled]: () => false,
-  [newUser.rejected]: () => false,
 });

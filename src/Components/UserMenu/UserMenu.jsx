@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../../redux/contacts/contactsOperation";
+import { userLogout } from "../../redux/user/userOperation";
 
 const UserMenu = () => {
-  const userName = useSelector((state) => state.contacts.user);
+  const userName = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
-
   return (
     <>
       <p>Добро пожаловать {userName.name}</p>

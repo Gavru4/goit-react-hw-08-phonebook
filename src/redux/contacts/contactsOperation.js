@@ -1,30 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
+import { logDOM } from "@testing-library/react";
 import {
   deleteContactApi,
-  getUserLogin,
   getUsersContactsApi,
-  newUserApi,
   postNewContactsApi,
-  userLogoutApi,
 } from "../../utils/contactsApi";
 
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = "";
-  },
-};
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = "";
+//   },
+// };
 
 export const getUserContacts = createAsyncThunk(
   "/contacts",
   async (_, thunkApi) => {
     try {
       const contacts = await getUsersContactsApi();
-      // token.set(form.token);
       console.log(contacts);
       return contacts;
     } catch (error) {
@@ -44,50 +39,12 @@ export const addUserContacts = createAsyncThunk(
     }
   }
 );
-
-export const loginUser = createAsyncThunk(
-  "users/login",
-  async (form, thunkApi) => {
-    try {
-      const login = await getUserLogin(form);
-      token.set(login.token);
-      return login;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.messsege);
-    }
-  }
-);
-export const newUser = createAsyncThunk(
-  "users/signup",
-  async (form, thunkApi) => {
-    try {
-      const newContact = await newUserApi(form);
-      return newContact;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const userLogout = createAsyncThunk(
-  "users/logout",
-  async (_, thunkApi) => {
-    try {
-      const userLogout = await userLogoutApi();
-      token.unset();
-      return userLogout;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (id, thunkApi) => {
     try {
-      const contact = await deleteContactApi(id);
-      return contact;
+      await deleteContactApi(id);
+      return id;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

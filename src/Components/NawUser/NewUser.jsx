@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Route } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { newUser } from "../../redux/contacts/contactsOperation";
+import { newUser } from "../../redux/user/userOperation";
 
 const form = {
   name: "",
