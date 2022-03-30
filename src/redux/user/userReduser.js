@@ -1,10 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import {
-  getUserContacts,
-  loginUser,
-  newUser,
-  userLogout,
-} from "./userOperation";
+import { loginUser, newUser, userLogout } from "./userOperation";
 
 const initialState = {
   user: { name: null, email: null, number: null },
@@ -13,8 +8,9 @@ const initialState = {
 };
 export const userRudeser = createReducer(initialState, {
   [newUser.fulfilled]: (state, { payload }) => {
-    state.user = payload.user;
-    state.token = payload.token;
+    state.user.name = payload.name;
+    state.user.email = payload.email;
+    // state.token = payload.token;
     state.isLogedIn = true;
   },
   [loginUser.fulfilled]: (state, { payload }) => {

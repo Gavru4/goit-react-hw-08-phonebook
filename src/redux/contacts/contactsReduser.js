@@ -6,15 +6,18 @@ import {
 } from "./contactsOperation";
 
 export const contactsRudeser = createReducer([], {
+  // [addUserContacts.fulfilled]: (state, { payload }) => {
+  //   console.log(payload);
+  //   // const contact = [...state, payload];
+  //   // return contact;
+  // },
   [addUserContacts.fulfilled]: (state, { payload }) => {
-    const contact = [...state, payload];
-    return contact;
+    const contactsList = [...state, payload];
+    return contactsList;
   },
-
-  [getUserContacts.fulfilled]: (state, { payload }) => {
+  [getUserContacts.fulfilled]: (_, { payload }) => {
     return payload;
   },
-
   [deleteContact.fulfilled]: (state, { payload }) => {
     return state.filter((el) => el.id !== payload);
   },

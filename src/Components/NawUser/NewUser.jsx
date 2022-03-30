@@ -18,7 +18,6 @@ const NewUser = () => {
   };
 
   const onFormSubmit = (e) => {
-    console.log(userForm);
     e.preventDefault();
     dispatch(newUser(userForm));
     setUserForm(form);

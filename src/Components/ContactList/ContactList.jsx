@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import s from "./ContactList.module.css";
-// import { filterContactsSelectors } from "../../redux/selectors/selectors";
+import { filterContactsSelectors } from "../../redux/selectors/selectors";
 import { useDispatch } from "react-redux";
 import {
   deleteContact,
@@ -9,9 +9,9 @@ import {
 import { useEffect } from "react";
 
 const ContactList = () => {
-  // const contactsList = useSelector((state) => filterContactsSelectors(state));
+  const contactsList = useSelector((state) => filterContactsSelectors(state));
   const dispatch = useDispatch();
-  const contactsList = useSelector((state) => state.contacts);
+  // const contactsList = useSelector((state) => state.contacts);
 
   useEffect(() => {
     dispatch(getUserContacts());

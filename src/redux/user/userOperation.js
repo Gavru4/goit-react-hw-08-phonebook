@@ -28,8 +28,9 @@ export const newUser = createAsyncThunk(
   "users/signup",
   async (form, thunkApi) => {
     try {
-      const newContact = await newUserApi(form);
-      return newContact;
+      const newUser = await newUserApi(form);
+      token.set(newUser);
+      return form;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
