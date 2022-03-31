@@ -1,7 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { getUserLogin, newUserApi, userLogoutApi } from "../../utils/userApi";
+import {
+  currentUserApi,
+  getUserLogin,
+  newUserApi,
+  userLogoutApi,
+} from "../../utils/userApi";
 
 const token = {
   set(token) {
@@ -11,6 +16,20 @@ const token = {
     axios.defaults.headers.common.Authorization = "";
   },
 };
+
+export const currentUser = createAsyncThunk(
+  "/users/current",
+  async (dataToken, thunkApi) => {
+    try {
+      token.set(dataToken);
+      const result = await currentUserApi(dataToken);
+
+      return { dataToken, result };
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.messsege);
+    }
+  }
+);
 
 export const loginUser = createAsyncThunk(
   "users/login",

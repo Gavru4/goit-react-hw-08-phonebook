@@ -16,7 +16,7 @@ import {
 // };
 
 export const getUserContacts = createAsyncThunk(
-  "/contacts",
+  "contacts/get",
   async (_, thunkApi) => {
     try {
       const contacts = await getUsersContactsApi();
@@ -28,7 +28,7 @@ export const getUserContacts = createAsyncThunk(
 );
 
 export const addUserContacts = createAsyncThunk(
-  "/contacts",
+  "contacts/add",
   async (form, thunkApi) => {
     try {
       const contact = await postNewContactsApi(form);
