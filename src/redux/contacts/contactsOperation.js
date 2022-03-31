@@ -1,20 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { logDOM } from "@testing-library/react";
 import {
   deleteContactApi,
   getUsersContactsApi,
   postNewContactsApi,
+  updateContactsApi,
 } from "../../utils/contactsApi";
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = "";
-//   },
-// };
-
+export const updateUserContacts = createAsyncThunk(
+  "contacts/update",
+  async (data, thunkApi) => {
+    console.log(data);
+    // console.log(token);
+    //data{id,token}
+    try {
+      const contacts = await updateContactsApi(data);
+      return contacts;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 export const getUserContacts = createAsyncThunk(
   "contacts/get",
   async (_, thunkApi) => {

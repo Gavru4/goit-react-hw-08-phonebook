@@ -20,7 +20,6 @@ const App = () => {
   const userToken = useSelector((state) => state.user.token);
 
   useEffect(() => {
-    // console.log(userToken);
     userToken && dispatch(currentUser(userToken));
   }, []);
 

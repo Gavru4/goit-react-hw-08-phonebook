@@ -2,6 +2,14 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
+export const updateContactsApi = ({ id, token }) => {
+  return axios
+    .patch(`/contacts/${id}`, token)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+};
 export const getUsersContactsApi = () => {
   return axios
     .get("/contacts")

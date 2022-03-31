@@ -5,14 +5,15 @@ import { useDispatch } from "react-redux";
 import {
   deleteContact,
   getUserContacts,
+  updateUserContacts,
 } from "../../redux/contacts/contactsOperation";
 import { useEffect } from "react";
 
 const ContactList = () => {
   const contactsList = useSelector((state) => filterContactsSelectors(state));
   const dispatch = useDispatch();
+  const userToken = useSelector((state) => state);
   // const contactsList = useSelector((state) => state.contacts);
-
   useEffect(() => {
     dispatch(getUserContacts());
   }, []);
@@ -31,6 +32,14 @@ const ContactList = () => {
                   }}
                 >
                   Delate
+                </button>
+                <button
+                  className={s.btn}
+                  onClick={() => {
+                    dispatch(updateUserContacts(userToken));
+                  }}
+                >
+                  Update
                 </button>
               </li>
             );
