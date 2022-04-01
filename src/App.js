@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 // import { loaderSelector } from "./redux/selectors/selectors";
 import MainNav from "./Components/MainNav/MainNav";
 import HomePage from "./Components/HomePage/HomaPage";
-import UserMenu from "./Components/UserMenu/UserMenu";
-import AuthNav from "./Components/AuthNav/AuthNav";
+// import UserMenu from "./Components/UserMenu/UserMenu";
+// import AuthNav from "./Components/AuthNav/AuthNav";
 import Login from "./Components/Login/Login";
 import NewUser from "./Components/NawUser/NewUser";
 import UserContacts from "./Components/UserContacts/UserContacts";
@@ -15,8 +15,12 @@ import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// const loaderStyle = {
+//   position: "absolute",
+//   paddingLeft: "50px",
+// };
 const App = () => {
-  const logIn = useSelector((state) => state.user.isLogedIn);
+  // const logIn = useSelector((state) => state.user.isLogedIn);
   const dispatch = useDispatch();
   const userToken = useSelector((state) => state.user.token);
 
@@ -28,7 +32,8 @@ const App = () => {
   return (
     <>
       <MainNav />
-      {logIn ? <UserMenu /> : <AuthNav />}
+      {/* {isLoading && <h2 style={loaderStyle}>Loading....</h2>} */}
+      {/* {logIn ? <UserMenu /> : <AuthNav />} */}
       <Switch>
         <PrivateRoute path={"/contacts"}>
           <UserContacts />
@@ -39,9 +44,6 @@ const App = () => {
         <PublicRoute path={"/register"} isRestricted>
           <NewUser />
         </PublicRoute>
-        {/* <PublicRoute path={"/register"} isRestricted>
-        <UserRigester />
-      </PublicRoute> */}
         <PublicRoute path={"/"} exact isRestricted>
           <HomePage />
         </PublicRoute>

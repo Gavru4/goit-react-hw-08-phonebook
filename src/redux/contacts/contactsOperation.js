@@ -9,9 +9,6 @@ import {
 export const updateUserContacts = createAsyncThunk(
   "contacts/update",
   async (data, thunkApi) => {
-    console.log(data);
-    // console.log(token);
-    //data{id,token}
     try {
       const contacts = await updateContactsApi(data);
       return contacts;

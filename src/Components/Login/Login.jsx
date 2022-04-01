@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/user/userOperation";
+import Form from "react-bootstrap/Form";
+import { Button, Container } from "react-bootstrap";
+import s from "../MainNav/MainNav.module.css";
 
 const loginObj = {
   email: "",
@@ -24,7 +27,42 @@ const Login = () => {
   };
 
   return (
-    <>
+    <Form onSubmit={onFormSubmit} className={s.nav}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control
+          type="email"
+          name="email"
+          placeholder="Enter email"
+          value={loginForm.email}
+          onChange={onInputChange}
+        />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={loginForm.password}
+          onChange={onInputChange}
+        />
+      </Form.Group>
+
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+  );
+};
+
+export default Login;
+{
+  /* <>
       <form onSubmit={onFormSubmit}>
         <span>Email</span>
         <input
@@ -44,8 +82,5 @@ const Login = () => {
         />
         <button type="submit">Submit</button>
       </form>
-    </>
-  );
-};
-
-export default Login;
+    </> */
+}

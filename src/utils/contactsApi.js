@@ -2,9 +2,10 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
-export const updateContactsApi = ({ id, token }) => {
+export const updateContactsApi = (data) => {
+  const { contactId, form } = data;
   return axios
-    .patch(`/contacts/${id}`, token)
+    .patch(`/contacts/${contactId}`, form)
     .then((res) => res.data)
     .catch((error) => {
       throw error;

@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { newUser } from "../../redux/user/userOperation";
-
+import s from "./NewUser.module.css";
 const form = {
   name: "",
   email: "",
@@ -24,36 +25,44 @@ const NewUser = () => {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <label>
-        <span>Enter your name:</span>
-        <input
-          value={userForm.name}
+    <Form onSubmit={onFormSubmit} className={s.nav}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Enter your name:</Form.Label>
+        <Form.Control
           type="text"
           name="name"
           onChange={hendlerInputChange}
+          value={userForm.name}
           required
         />
-        <span>Enter your email:</span>
-        <input
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Enter your email:</Form.Label>
+        <Form.Control
           value={userForm.email}
           type="email"
           name="email"
           onChange={hendlerInputChange}
           required
         />
+      </Form.Group>
 
-        <span>Password:</span>
-        <input
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           value={userForm.password}
           type="password"
           name="password"
           onChange={hendlerInputChange}
           required
         />
-        <button type="submit">Submit</button>
-      </label>
-    </form>
+      </Form.Group>
+
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 };
 

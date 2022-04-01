@@ -1,7 +1,6 @@
-.btn {
-  font-size: 12px;
-  padding: 5px;
-  margin-left: 15px;
+.list {
+  width: 500px;
+  margin: auto;
 }
 .item {
   margin-bottom: 10px;

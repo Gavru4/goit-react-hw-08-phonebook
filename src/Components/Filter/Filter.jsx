@@ -1,3 +1,4 @@
+import { Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { filterContacts } from "../../redux/filter/filterAction";
@@ -7,17 +8,19 @@ const Filter = () => {
   const dispatch = useDispatch();
   const inputvalue = useSelector((state) => state.filter);
   return (
-    <div className={s.wrapper}>
-      <span className={s.title}>Find contacts by name</span>
-      <input
-        value={inputvalue}
-        onChange={(e) => {
-          dispatch(filterContacts(e.target.value));
-        }}
-        type="text"
-        name="filter"
-      />
-    </div>
+    <Form className={s.filter}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Find contacts by name</Form.Label>
+        <Form.Control
+          value={inputvalue}
+          onChange={(e) => {
+            dispatch(filterContacts(e.target.value));
+          }}
+          type="text"
+          name="filter"
+        />
+      </Form.Group>
+    </Form>
   );
 };
 

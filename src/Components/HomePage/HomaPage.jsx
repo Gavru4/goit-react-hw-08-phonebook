@@ -1,7 +1,9 @@
+import s from "./HomePage.module.css";
+
 const HomePage = () => {
   return (
     <>
-      <p>Welcome to the most convenient phonebook</p>
+      <p className={s.text}>Welcome to the most convenient phonebook</p>
     </>
   );
 };

@@ -3,6 +3,7 @@ import {
   addUserContacts,
   deleteContact,
   getUserContacts,
+  updateUserContacts,
 } from "./contactsOperation";
 
 export const contactsRudeser = createReducer([], {
@@ -16,6 +17,13 @@ export const contactsRudeser = createReducer([], {
   [deleteContact.fulfilled]: (state, { payload }) => {
     return state.filter((el) => el.id !== payload);
   },
+  [updateUserContacts.fulfilled]: (state, { payload }) => {
+    const contacts = state.map((el) => {
+      if (el.id === payload.id) return payload;
+      return el;
+    });
+    return contacts;
+  },
 });
 
 export const isLoadingReduser = createReducer(false, {
@@ -25,4 +33,10 @@ export const isLoadingReduser = createReducer(false, {
   [deleteContact.pending]: () => true,
   [deleteContact.fulfilled]: () => false,
   [deleteContact.rejected]: () => false,
+  [addUserContacts.pending]: () => true,
+  [addUserContacts.fulfilled]: () => false,
+  [addUserContacts.rejected]: () => false,
+  [updateUserContacts.pending]: () => true,
+  [updateUserContacts.fulfilled]: () => false,
+  [updateUserContacts.rejected]: () => false,
 });

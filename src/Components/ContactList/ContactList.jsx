@@ -5,20 +5,18 @@ import { useDispatch } from "react-redux";
 import {
   deleteContact,
   getUserContacts,
-  updateUserContacts,
 } from "../../redux/contacts/contactsOperation";
 import { useEffect } from "react";
-import { Button } from "bootstrap";
-import { Col, Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
-const ContactList = () => {
+const ContactList = ({ editingUserContacts }) => {
   const contactsList = useSelector((state) => filterContactsSelectors(state));
   const dispatch = useDispatch();
-  const userToken = useSelector((state) => state);
-  // const contactsList = useSelector((state) => state.contacts);
+
   useEffect(() => {
     dispatch(getUserContacts());
   }, []);
+
   return (
     <>
       {contactsList && (
@@ -27,27 +25,24 @@ const ContactList = () => {
             return (
               <li className={s.item} key={el.id}>
                 {el.name}: {el.number}
-                <Row className="mx-0">
-                  <Button as={Col} variant="primary">
-                    Delate
-                  </Button>
-                </Row>
-                {/* <button
-                  className={s.btn}
+                <Button
+                  variant="danger"
+                  className="mx-2"
+                  size="sm"
                   onClick={() => {
                     dispatch(deleteContact(el.id));
                   }}
                 >
                   Delate
-                </button> */}
-                {/* <button
-                  className={s.btn}
-                  onClick={() => {
-                    dispatch(updateUserContacts(userToken));
-                  }}
+                </Button>
+                <Button
+                  variant="success"
+                  className="mx-2"
+                  size="sm"
+                  onClick={() => editingUserContacts(el)}
                 >
                   Update
-                </button> */}
+                </Button>
               </li>
             );
           })}
