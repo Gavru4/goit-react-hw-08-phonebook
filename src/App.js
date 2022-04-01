@@ -13,6 +13,7 @@ import PublicRoute from "./Components/PablicRoute/PablicRoute";
 import { Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const logIn = useSelector((state) => state.user.isLogedIn);

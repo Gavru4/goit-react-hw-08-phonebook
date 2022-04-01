@@ -8,6 +8,8 @@ import {
   updateUserContacts,
 } from "../../redux/contacts/contactsOperation";
 import { useEffect } from "react";
+import { Button } from "bootstrap";
+import { Col, Row } from "react-bootstrap";
 
 const ContactList = () => {
   const contactsList = useSelector((state) => filterContactsSelectors(state));
@@ -25,22 +27,27 @@ const ContactList = () => {
             return (
               <li className={s.item} key={el.id}>
                 {el.name}: {el.number}
-                <button
+                <Row className="mx-0">
+                  <Button as={Col} variant="primary">
+                    Delate
+                  </Button>
+                </Row>
+                {/* <button
                   className={s.btn}
                   onClick={() => {
                     dispatch(deleteContact(el.id));
                   }}
                 >
                   Delate
-                </button>
-                <button
+                </button> */}
+                {/* <button
                   className={s.btn}
                   onClick={() => {
                     dispatch(updateUserContacts(userToken));
                   }}
                 >
                   Update
-                </button>
+                </button> */}
               </li>
             );
           })}
