@@ -1,10 +1,7 @@
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-// import { loaderSelector } from "./redux/selectors/selectors";
 import MainNav from "./Components/MainNav/MainNav";
 import HomePage from "./Components/HomePage/HomaPage";
-// import UserMenu from "./Components/UserMenu/UserMenu";
-// import AuthNav from "./Components/AuthNav/AuthNav";
 import Login from "./Components/Login/Login";
 import NewUser from "./Components/NawUser/NewUser";
 import UserContacts from "./Components/UserContacts/UserContacts";
@@ -14,6 +11,7 @@ import { Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Example from "./Components/Modal/Modal";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,7 +33,8 @@ const App = () => {
           <Login />
         </PublicRoute>
         <PublicRoute path={"/register"} isRestricted>
-          <NewUser />
+          {/* <NewUser /> */}
+          <Example />
         </PublicRoute>
         <PublicRoute path={"/"} exact isRestricted>
           <HomePage />
