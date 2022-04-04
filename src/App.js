@@ -15,12 +15,7 @@ import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// const loaderStyle = {
-//   position: "absolute",
-//   paddingLeft: "50px",
-// };
 const App = () => {
-  // const logIn = useSelector((state) => state.user.isLogedIn);
   const dispatch = useDispatch();
   const userToken = useSelector((state) => state.user.token);
 
@@ -28,12 +23,10 @@ const App = () => {
     userToken && dispatch(currentUser(userToken));
   }, []);
 
-  // const isLoading = useSelector(loaderSelector);
   return (
     <>
       <MainNav />
-      {/* {isLoading && <h2 style={loaderStyle}>Loading....</h2>} */}
-      {/* {logIn ? <UserMenu /> : <AuthNav />} */}
+
       <Switch>
         <PrivateRoute path={"/contacts"}>
           <UserContacts />
@@ -53,21 +46,3 @@ const App = () => {
 };
 
 export default App;
-
-//  <MainNav />
-//       {logIn ? <UserMenu /> : <AuthNav />}
-//       <Switch>
-//         <Route path={"/"} exact>
-//           <HomePage />
-//         </Route>
-//         <Route path={"/login"}>
-//           <Login />
-//         </Route>
-//         <Route path="/register" activeStyle={{ color: "red" }}>
-//           <NewUser />
-//         </Route>
-
-//         <Route path={"/contacts"}>
-//           <UserContacts />
-//         </Route>
-//       </Switch>
