@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import BasicRating from "../Reiting/Reiting";
-import s from "./Modal.module.css";
+import s from "./ResumeModal.module.css";
 
 // const style = {
 //   position: "absolute",
@@ -18,7 +18,7 @@ import s from "./Modal.module.css";
 //   p: 4,
 // };
 
-export default function BasicModal() {
+export default function ResumeModal() {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);

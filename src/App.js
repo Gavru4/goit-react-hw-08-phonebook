@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MainNav from "./Components/MainNav/MainNav";
 import HomePage from "./Components/HomePage/HomaPage";
 import Login from "./Components/Login/Login";
-import NewUser from "./Components/NawUser/NewUser";
+// import NewUser from "./Components/NawUser/NewUser";
 import UserContacts from "./Components/UserContacts/UserContacts";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./Components/PablicRoute/PablicRoute";
@@ -11,7 +11,8 @@ import { Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Example from "./Components/Modal/Modal";
+// import ResumeModal from "./Components/ResumeModal/ResumeModal";
+import InstructionModal from "./Components/InstructionModal/InstructionModal";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,8 @@ const App = () => {
         </PublicRoute>
         <PublicRoute path={"/register"} isRestricted>
           {/* <NewUser /> */}
-          <Example />
+          {/* <ResumeModal /> */}
+          <InstructionModal />
         </PublicRoute>
         <PublicRoute path={"/"} exact isRestricted>
           <HomePage />
