@@ -9,15 +9,21 @@ import s from "./ReviewModal.module.css";
 import Rating from "@mui/material/Rating";
 import { useDispatch } from "react-redux";
 
-export default function ReviewModal() {
+export default function ReviewModal({ bookId, modalOpen, onModalClose }) {
   const [open, setOpen] = React.useState(false);
   const [review, setReview] = React.useState("");
   const [rating, setRaiting] = React.useState(null);
-
   const dispatch = useDispatch();
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  React.useEffect(() => {
+    setOpen(modalOpen);
+  }, [modalOpen]);
+
+  // const handleOpen = () => setOpen(modalOpen);
+  const handleClose = () => {
+    setOpen(false);
+    onModalClose();
+  };
 
   const onRatihgChange = (e) => {
     const currentRating = e.target.value;
@@ -30,19 +36,18 @@ export default function ReviewModal() {
   };
 
   const handleSave = (e) => {
-    // dispatch(AddBooksReview({ form: { review, rating }, booksId: id }));
+    // console.log({ form: { review, rating } });
+    // dispatch(AddBooksReview({ form: { review, rating }, booksId: bookId }));
     handleReset();
+    onModalClose();
   };
   const handleReset = () => {
     setOpen(false);
     setReview("");
     setRaiting(null);
   };
-
   return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-
+    <>
       <Modal
         open={open}
         onClose={handleClose}
@@ -56,7 +61,7 @@ export default function ReviewModal() {
           <Rating
             name="half-rating"
             size="small"
-            // defaultValue={2.5}
+            // defaultValue={test}
             precision={0.5}
             onClick={onRatihgChange}
           />
@@ -81,6 +86,6 @@ export default function ReviewModal() {
           </Typography>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }

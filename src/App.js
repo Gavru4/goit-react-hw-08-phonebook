@@ -8,10 +8,10 @@ import UserContacts from "./Components/UserContacts/UserContacts";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./Components/PablicRoute/PablicRoute";
 import { Switch } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReviewModal from "./Components/ReviewModal/ResumeModal.jsx";
+import ReviewModal from "./Components/ReviewModal/ReviewModal";
 
 // import InstructionModal from "./Components/InstructionModal/InstructionModal";
 
@@ -19,9 +19,22 @@ const App = () => {
   const dispatch = useDispatch();
   const userToken = useSelector((state) => state.user.token);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [bookId, setBookId] = useState(null);
+
   useEffect(() => {
     userToken && dispatch(currentUser(userToken));
   }, []);
+
+  const onModalOpen = () => {
+    setModalOpen(true);
+    setBookId(12334);
+  };
+
+  const onModalClose = () => {
+    setModalOpen(false);
+    setBookId(null);
+  };
 
   return (
     <>
@@ -36,7 +49,14 @@ const App = () => {
         </PublicRoute>
         <PublicRoute path={"/register"} isRestricted>
           {/* <NewUser /> */}
-          <ReviewModal />
+          <button onClick={onModalOpen}>Резюме</button>
+          {modalOpen && (
+            <ReviewModal
+              bookId={bookId}
+              modalOpen={modalOpen}
+              onModalClose={onModalClose}
+            />
+          )}
           {/* <InstructionModal /> */}
         </PublicRoute>
         <PublicRoute path={"/"} exact isRestricted>
