@@ -11,8 +11,9 @@ import { Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import ResumeModal from "./Components/ResumeModal/ResumeModal";
-import InstructionModal from "./Components/InstructionModal/InstructionModal";
+import ReviewModal from "./Components/ReviewModal/ResumeModal.jsx";
+
+// import InstructionModal from "./Components/InstructionModal/InstructionModal";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,8 +36,8 @@ const App = () => {
         </PublicRoute>
         <PublicRoute path={"/register"} isRestricted>
           {/* <NewUser /> */}
-          {/* <ResumeModal /> */}
-          <InstructionModal />
+          <ReviewModal />
+          {/* <InstructionModal /> */}
         </PublicRoute>
         <PublicRoute path={"/"} exact isRestricted>
           <HomePage />
