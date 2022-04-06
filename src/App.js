@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReviewModal from "./Components/ReviewModal/ReviewModal";
+import { Rating } from "@mui/material";
 
 // import InstructionModal from "./Components/InstructionModal/InstructionModal";
 
@@ -21,6 +22,7 @@ const App = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [bookId, setBookId] = useState(null);
+  const [retingValue, setRetingValue] = useState(null);
 
   useEffect(() => {
     userToken && dispatch(currentUser(userToken));
@@ -31,11 +33,11 @@ const App = () => {
     setBookId(12334);
   };
 
-  const onModalClose = () => {
+  const onModalClose = (value) => {
     setModalOpen(false);
     setBookId(null);
+    value && setRetingValue(value);
   };
-
   return (
     <>
       <MainNav />
@@ -49,14 +51,23 @@ const App = () => {
         </PublicRoute>
         <PublicRoute path={"/register"} isRestricted>
           {/* <NewUser /> */}
-          <button onClick={onModalOpen}>Резюме</button>
-          {modalOpen && (
-            <ReviewModal
-              bookId={bookId}
-              modalOpen={modalOpen}
-              onModalClose={onModalClose}
+
+          <div>
+            <Rating
+              name="half-rating"
+              size="small"
+              value={+retingValue}
+              precision={0.5}
             />
-          )}
+            <button onClick={onModalOpen}>Резюме</button>
+            {modalOpen && (
+              <ReviewModal
+                bookId={bookId}
+                modalOpen={modalOpen}
+                onModalClose={onModalClose}
+              />
+            )}
+          </div>
           {/* <InstructionModal /> */}
         </PublicRoute>
         <PublicRoute path={"/"} exact isRestricted>

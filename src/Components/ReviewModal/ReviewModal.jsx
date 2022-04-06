@@ -22,7 +22,7 @@ export default function ReviewModal({ bookId, modalOpen, onModalClose }) {
   // const handleOpen = () => setOpen(modalOpen);
   const handleClose = () => {
     setOpen(false);
-    onModalClose();
+    rating && onModalClose(rating);
   };
 
   const onRatihgChange = (e) => {
@@ -39,7 +39,7 @@ export default function ReviewModal({ bookId, modalOpen, onModalClose }) {
     // console.log({ form: { review, rating } });
     // dispatch(AddBooksReview({ form: { review, rating }, booksId: bookId }));
     handleReset();
-    onModalClose();
+    rating && onModalClose(rating);
   };
   const handleReset = () => {
     setOpen(false);
