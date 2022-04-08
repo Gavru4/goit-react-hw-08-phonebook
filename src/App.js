@@ -3,41 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import MainNav from "./Components/MainNav/MainNav";
 import HomePage from "./Components/HomePage/HomaPage";
 import Login from "./Components/Login/Login";
-// import NewUser from "./Components/NawUser/NewUser";
+import NewUser from "./Components/NawUser/NewUser";
 import UserContacts from "./Components/UserContacts/UserContacts";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import PublicRoute from "./Components/PablicRoute/PablicRoute";
 import { Switch } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReviewModal from "./Components/ReviewModal/ReviewModal";
-import { Rating } from "@mui/material";
-
-// import InstructionModal from "./Components/InstructionModal/InstructionModal";
 
 const App = () => {
   const dispatch = useDispatch();
   const userToken = useSelector((state) => state.user.token);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [bookId, setBookId] = useState(null);
-  const [retingValue, setRetingValue] = useState(null);
-
   useEffect(() => {
     userToken && dispatch(currentUser(userToken));
   }, []);
 
-  const onModalOpen = () => {
-    setModalOpen(true);
-    setBookId(12334);
-  };
-
-  const onModalClose = (value) => {
-    setModalOpen(false);
-    setBookId(null);
-    value && setRetingValue(value);
-  };
   return (
     <>
       <MainNav />
@@ -50,25 +32,7 @@ const App = () => {
           <Login />
         </PublicRoute>
         <PublicRoute path={"/register"} isRestricted>
-          {/* <NewUser /> */}
-
-          <div>
-            <Rating
-              name="half-rating"
-              size="small"
-              value={+retingValue}
-              precision={0.5}
-            />
-            <button onClick={onModalOpen}>Резюме</button>
-            {modalOpen && (
-              <ReviewModal
-                bookId={bookId}
-                modalOpen={modalOpen}
-                onModalClose={onModalClose}
-              />
-            )}
-          </div>
-          {/* <InstructionModal /> */}
+          <NewUser />
         </PublicRoute>
         <PublicRoute path={"/"} exact isRestricted>
           <HomePage />
