@@ -8,8 +8,7 @@ const initialState = {
 };
 export const userRudeser = createReducer(initialState, {
   [currentUser.fulfilled]: (state, { payload }) => {
-    state.user = payload.result.name;
-    state.email = payload.result.email;
+    state.user = payload.result;
     state.token = payload.dataToken;
     state.isLogedIn = true;
   },
@@ -20,7 +19,6 @@ export const userRudeser = createReducer(initialState, {
   },
   [loginUser.fulfilled]: (state, { payload }) => {
     state.user = payload.user;
-    state.email = payload.email;
     state.token = payload.token;
     state.isLogedIn = true;
   },
@@ -36,4 +34,13 @@ export const isLoadingReduser = createReducer(false, {
   [newUser.pending]: () => true,
   [newUser.fulfilled]: () => false,
   [newUser.rejected]: () => false,
+  [currentUser.pending]: () => true,
+  [currentUser.fulfilled]: () => false,
+  [currentUser.rejected]: () => false,
+  [loginUser.pending]: () => true,
+  [loginUser.fulfilled]: () => false,
+  [loginUser.rejected]: () => false,
+  [userLogout.pending]: () => true,
+  [userLogout.fulfilled]: () => false,
+  [userLogout.rejected]: () => false,
 });
