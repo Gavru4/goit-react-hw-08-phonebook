@@ -25,17 +25,17 @@ const App = () => {
       <MainNav />
 
       <Switch>
+        <PublicRoute path={"/"} exact isRestricted={false}>
+          <HomePage />
+        </PublicRoute>
         <PrivateRoute path={"/contacts"}>
           <UserContacts />
         </PrivateRoute>
-        <PublicRoute path={"/login"} isRestricted={true}>
+        <PublicRoute path={"/login"} isRestricted>
           <Login />
         </PublicRoute>
         <PublicRoute path={"/register"} isRestricted>
           <NewUser />
-        </PublicRoute>
-        <PublicRoute path={"/"} exact isRestricted>
-          <HomePage />
         </PublicRoute>
       </Switch>
     </>

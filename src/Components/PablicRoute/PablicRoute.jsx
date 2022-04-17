@@ -4,7 +4,8 @@ import { Redirect } from "react-router-dom";
 
 const PublicRoute = ({ isRestricted, children, path, exact }) => {
   const isLogedIn = useSelector((state) => state.user.isLogedIn);
-  console.log(path);
+  console.log(isLogedIn);
+  // console.log(isRestricted);
 
   return isLogedIn && isRestricted ? (
     <Redirect to={"/contacts"} />
