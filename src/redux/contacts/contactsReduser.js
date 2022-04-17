@@ -6,23 +6,35 @@ import {
   updateUserContacts,
 } from "./contactsOperation";
 
-export const contactsRudeser = createReducer([], {
+const initialState = {
+  userContacts: [],
+  contactIsDeleted: false,
+  contactIsUpdated: false,
+  contactIsAdded: false,
+};
+
+export const contactsRudeser = createReducer(initialState, {
   [addUserContacts.fulfilled]: (state, { payload }) => {
-    const contactsList = [...state, payload];
-    return contactsList;
+    state.userContacts = [...state.userContacts, payload];
+    state.contactIsAdded = true;
   },
-  [getUserContacts.fulfilled]: (_, { payload }) => {
-    return payload;
+  [getUserContacts.fulfilled]: (state, { payload }) => {
+    state.userContacts = [...payload];
   },
   [deleteContact.fulfilled]: (state, { payload }) => {
-    return state.filter((el) => el.id !== payload);
+    state.userContacts = state.userContacts.filter((el) => el.id !== payload);
+    state.contactIsDeleted = true;
   },
   [updateUserContacts.fulfilled]: (state, { payload }) => {
-    const contacts = state.map((el) => {
-      if (el.id === payload.id) return payload;
-      return el;
+    state.contactIsUpdated = true;
+    const contacts = state.userContacts.map((el) => {
+      if (el.id === payload.id) {
+        return payload;
+      } else {
+        return el;
+      }
     });
-    return contacts;
+    state.userContacts = [...contacts];
   },
 });
 

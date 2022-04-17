@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import s from "./ContactList.module.css";
 import {
+  contactIsDeleted,
   filterContactsSelectors,
   loaderSelector,
 } from "../../redux/selectors/selectors";
@@ -13,11 +14,18 @@ import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { ListGroup } from "react-bootstrap";
 import { Plane } from "react-loader-spinner";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 const ContactList = ({ editingUserContacts }) => {
   const contactsList = useSelector((state) => filterContactsSelectors(state));
   const dispatch = useDispatch();
   const isLoading = useSelector(loaderSelector);
+  const isDeleted = useSelector(contactIsDeleted);
+
+  const onDelateContact = (el) => {
+    dispatch(deleteContact(el.id));
+    isDeleted && Notify.info("Contact is deleted");
+  };
 
   useEffect(() => {
     dispatch(getUserContacts());
@@ -50,7 +58,7 @@ const ContactList = ({ editingUserContacts }) => {
                     className="mx-2"
                     size="sm"
                     onClick={() => {
-                      dispatch(deleteContact(el.id));
+                      onDelateContact(el);
                     }}
                   >
                     Delate

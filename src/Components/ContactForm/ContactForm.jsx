@@ -6,6 +6,12 @@ import {
   updateUserContacts,
 } from "../../redux/contacts/contactsOperation";
 import { Button, Form } from "react-bootstrap";
+import { Report } from "notiflix/build/notiflix-report-aio";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
+import {
+  contactIsAdded,
+  contactIsUpdated,
+} from "../../redux/selectors/selectors";
 
 const stateObj = {
   name: "",
@@ -15,7 +21,10 @@ const ContactForm = ({ editingContact }) => {
   const [form, setForm] = useState(stateObj);
 
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts);
+  const contacts = useSelector((state) => state.contacts.userContacts);
+  const isUpdated = useSelector(contactIsUpdated);
+  // const isAdded = useSelector(contactIsAdded);
+  const contactIsAdded = useSelector((state) => state.contacts.contactIsAdded);
 
   const heandlerInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,9 +33,17 @@ const ContactForm = ({ editingContact }) => {
 
   const onContactIncludes = (form) => {
     const isIncludes = contacts.some((el) => el.name === form.name);
-    if (isIncludes) return alert(`${form.name} is olredy in contact`);
-
+    if (isIncludes) {
+      return Report.failure(
+        "Very sorry 😞",
+        `${form.name}, already in the contact list`,
+        "Okay"
+      );
+    }
     dispatch(addUserContacts(form));
+    console.log(contactIsAdded);
+
+    contactIsAdded && Notify.success("New contact successfully added 🙂");
   };
 
   const onFormSubmit = (e) => {
@@ -35,8 +52,9 @@ const ContactForm = ({ editingContact }) => {
       ? dispatch(updateUserContacts({ form, contactId: editingContact.id }))
       : onContactIncludes(form);
     setForm(stateObj);
+    isUpdated && Notify.info("Contact is updated");
   };
-
+  console.log(editingContact);
   useEffect(() => {
     if (editingContact) {
       const { name, number } = editingContact;

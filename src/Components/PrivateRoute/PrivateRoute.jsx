@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 
 const PrivateRoute = ({ children, path }) => {
   const isLogedIn = useSelector((state) => state.user.isLogedIn);
+
   return isLogedIn ? (
     <Route path={path}>{children}</Route>
   ) : (

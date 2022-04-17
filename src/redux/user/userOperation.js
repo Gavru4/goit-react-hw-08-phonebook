@@ -18,12 +18,11 @@ const token = {
 };
 
 export const currentUser = createAsyncThunk(
-  "/users/current",
+  "/user/current",
   async (dataToken, thunkApi) => {
     try {
       token.set(dataToken);
       const result = await currentUserApi(dataToken);
-
       return { dataToken, result };
     } catch (error) {
       return thunkApi.rejectWithValue(error.messsege);
