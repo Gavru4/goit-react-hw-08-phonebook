@@ -17,24 +17,27 @@ export const contactsRudeser = createReducer(initialState, {
   [addUserContacts.fulfilled]: (state, { payload }) => {
     state.userContacts = [...state.userContacts, payload];
     state.contactIsAdded = true;
+    state.contactIsDeleted = false;
+    state.contactIsUpdated = false;
   },
   [getUserContacts.fulfilled]: (state, { payload }) => {
     state.userContacts = [...payload];
+    state.contactIsAdded = false;
+    state.contactIsDeleted = false;
+    state.contactIsUpdated = false;
   },
   [deleteContact.fulfilled]: (state, { payload }) => {
     state.userContacts = state.userContacts.filter((el) => el.id !== payload);
     state.contactIsDeleted = true;
+    state.contactIsAdded = false;
+    state.contactIsUpdated = false;
   },
   [updateUserContacts.fulfilled]: (state, { payload }) => {
     state.contactIsUpdated = true;
-    const contacts = state.userContacts.map((el) => {
-      if (el.id === payload.id) {
-        return payload;
-      } else {
-        return el;
-      }
+    state.userContacts = state.userContacts.map((el) => {
+      if (el.id === payload.id) return payload;
+      return el;
     });
-    state.userContacts = [...contacts];
   },
 });
 
