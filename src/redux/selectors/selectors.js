@@ -13,4 +13,4 @@ export const filterContactsSelectors = (state) => {
 export const loaderSelector = ({ isloading }) => isloading;
 export const contactIsDeleted = (state) => state.contacts.contactIsDeleted;
 export const contactIsUpdated = (state) => state.contacts.contactIsUpdated;
-// export const contactIsAdded = (state) => state.contacts.contactIsAdded;
+export const contactIsAdded = (state) => state.contacts.contactIsAdded;

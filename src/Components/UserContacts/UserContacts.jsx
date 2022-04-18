@@ -12,7 +12,10 @@ const UserContacts = () => {
 
   return (
     <>
-      <ContactForm editingContact={editingContact} />
+      <ContactForm
+        editingContact={editingContact}
+        onUserContactsEdit={editingUserContacts}
+      />
       <Filter />
       <ContactList editingUserContacts={editingUserContacts} />
     </>

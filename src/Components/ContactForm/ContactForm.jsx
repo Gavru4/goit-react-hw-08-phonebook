@@ -17,14 +17,13 @@ const stateObj = {
   name: "",
   number: "",
 };
-const ContactForm = ({ editingContact }) => {
+const ContactForm = ({ editingContact, onUserContactsEdit }) => {
   const [form, setForm] = useState(stateObj);
 
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.userContacts);
   const isUpdated = useSelector(contactIsUpdated);
-  // const isAdded = useSelector(contactIsAdded);
-  const contactIsAdded = useSelector((state) => state.contacts);
+  const isAdded = useSelector(contactIsAdded);
 
   const heandlerInputChange = (event) => {
     const { name, value } = event.target;
@@ -42,22 +41,20 @@ const ContactForm = ({ editingContact }) => {
     }
     dispatch(addUserContacts(form));
 
-    contactIsAdded && Notify.success("New contact successfully added 🙂");
+    isAdded && Notify.success("New contact successfully added 🙂");
   };
-
   const onFormSubmit = (e) => {
     e.preventDefault();
-
     editingContact
       ? dispatch(updateUserContacts({ form, contactId: editingContact.id }))
       : onContactIncludes(form);
 
     setForm(stateObj);
-    editingContact = null;
+    onUserContactsEdit(null);
 
     isUpdated && Notify.info("Contact is updated");
   };
-  console.log(editingContact);
+
   useEffect(() => {
     if (editingContact) {
       const { name, number } = editingContact;

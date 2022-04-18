@@ -24,7 +24,7 @@ const ContactList = ({ editingUserContacts }) => {
 
   const onDelateContact = (el) => {
     dispatch(deleteContact(el.id));
-    isDeleted && Notify.info("Contact is deleted");
+    isDeleted && Notify.failure("Contact is deleted");
   };
 
   useEffect(() => {
