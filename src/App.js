@@ -11,6 +11,7 @@ import { Switch } from "react-router-dom";
 import { useEffect } from "react";
 import { currentUser } from "./redux/user/userOperation";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ChooseTesting from "./Components/ChooseTesting/ChooseTesting";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,8 @@ const App = () => {
 
       <Switch>
         <PublicRoute path={"/"} exact isRestricted={false}>
-          <HomePage />
+          {/* <HomePage /> */}
+          <ChooseTesting />
         </PublicRoute>
         <PrivateRoute path={"/contacts"}>
           <UserContacts />
